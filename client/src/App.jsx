@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-
+import "./App.css";
 const API_BASE = import.meta.env.VITE_API_BASE || "";
 
 const initialProductForm = {
@@ -353,8 +353,8 @@ function App() {
         {view === "browse" && (
           <>
             <section className="hero">
-              <h1>MERN ShopEZ</h1>
-              <p>Same functionality, now with a React frontend.</p>
+              <h1> ShopEZ</h1>
+              <p>Destination of your shopping</p>
             </section>
             <section className="controls">
               <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search products..." />
