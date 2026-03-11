@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: shopez-mern
+    runtime: node
+    plan: free
+    buildCommand: npm install ; npm --prefix client install ; npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: STRIPE_SECRET
+        sync: false
+      - key: STRIPE_PUBLISHABLE
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false

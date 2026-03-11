@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopEZ | Effortless Online Shopping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+
+    <header class="topbar">
+      <div class="logo-wrap">
+        <div class="logo-dot"></div>
+        <h1>ShopEZ</h1>
+      </div>
+      <nav>
+        <button id="nav-browse" class="nav-btn active">Browse</button>
+        <button id="nav-seller" class="nav-btn">Seller</button>
+        <button id="nav-profile" class="nav-btn">Profile</button>
+        <button id="open-auth" class="btn ghost">Sign In</button>
+        <button id="open-cart" class="btn solid">Cart <span id="cart-count">0</span></button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="browse-section" class="view">
+        <section class="hero">
+          <p class="kicker">Your one-stop destination</p>
+          <h2>Effortless Shopping for Buyers.<br />Actionable Insights for Sellers.</h2>
+          <p>
+            Discover products with transparent reviews and live discounts, then checkout securely and get instant confirmation.
+          </p>
+          <div class="hero-strip">
+            <div>
+              <strong id="metric-products">0</strong>
+              <span>Products</span>
+            </div>
+            <div>
+              <strong>24/7</strong>
+              <span>Safe Checkout</span>
+            </div>
+            <div>
+              <strong>Real-Time</strong>
+              <span>Seller Analytics</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="controls">
+          <input id="search-input" type="text" placeholder="Search products, brands, categories..." />
+          <select id="category-filter">
+            <option value="">All Categories</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Wearables">Wearables</option>
+            <option value="Home">Home</option>
+            <option value="Fashion">Fashion</option>
+          </select>
+          <select id="sort-filter">
+            <option value="">Newest</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+            <option value="discount">Best Discount</option>
+          </select>
+          <button id="refresh-products" class="btn ghost">Refresh</button>
+        </section>
+
+        <section>
+          <div id="product-grid" class="product-grid"></div>
+        </section>
+      </section>
+
+      <section id="profile-section" class="view hidden">
+        <h2>My Profile</h2>
+        <form id="profile-form" class="form-card">
+          <label for="profile-name">Name</label>
+          <input id="profile-name" type="text" required />
+          <label for="profile-email">Email</label>
+          <input id="profile-email" type="email" required />
+          <button type="submit" class="btn solid">Update Profile</button>
+        </form>
+
+        <h3>My Wishlist</h3>
+        <div id="wishlist-grid" class="product-grid"></div>
+
+        <h3>Order History</h3>
+        <ul id="order-history" class="list"></ul>
+      </section>
+
+      <section id="seller-section" class="view hidden">
+        <h2>Seller Dashboard</h2>
+        <div class="dashboard-cards" id="seller-dashboard-cards"></div>
+
+        <h3>My Products</h3>
+        <button id="add-product-btn" class="btn solid">+ Add Product</button>
+        <div id="seller-products" class="product-grid"></div>
+
+        <h3>Orders</h3>
+        <ul id="seller-orders" class="list"></ul>
+        <form id="order-status-form" class="hidden">
+          <select id="order-status-select"></select>
+          <button type="submit" class="btn solid">Update Status</button>
+        </form>
+      </section>
+
+      <section id="seller-dashboard" class="seller-dashboard hidden">
+        <div class="dashboard-cards" id="dashboard-cards"></div>
+        <h4>Top Products</h4>
+        <ul id="top-products" class="list"></ul>
+      </section>
+    </main>
+
+    <aside id="cart-panel" class="panel hidden">
+      <div class="panel-head">
+        <h3>Your Cart</h3>
+        <button id="close-cart" class="panel-close">X</button>
+      </div>
+      <ul id="cart-items" class="list"></ul>
+      <div id="cart-summary"></div>
+      <form id="checkout-form" class="checkout-form">
+        <label for="shipping-address">Shipping Address</label>
+        <textarea id="shipping-address" rows="3" required placeholder="Enter full shipping address"></textarea>
+        <button class="btn solid" type="submit">Secure Checkout</button>
+      </form>
+      <p id="checkout-status" class="status"></p>
+    </aside>
+
+    <dialog id="auth-modal" class="auth-modal">
+      <form id="auth-form" method="dialog">
+        <h3 id="auth-title">Sign In</h3>
+        <input id="auth-name" type="text" placeholder="Name (for register)" />
+        <input id="auth-email" type="email" required placeholder="Email" />
+        <input id="auth-password" type="password" required placeholder="Password" />
+        <select id="auth-role">
+          <option value="buyer">Buyer</option>
+          <option value="seller">Seller</option>
+        </select>
+        <div class="auth-actions">
+          <button type="button" id="toggle-auth" class="btn ghost">Switch to Register</button>
+          <button type="submit" class="btn solid">Continue</button>
+        </div>
+        <p id="auth-status" class="status"></p>
+      </form>
+    </dialog>
+
+    <dialog id="product-modal" class="form-modal">
+      <form id="product-form" method="dialog">
+        <h3>Add Product</h3>
+        <input id="product-name" type="text" placeholder="Product Name" required />
+        <textarea id="product-description" placeholder="Description" required></textarea>
+        <input id="product-category" type="text" placeholder="Category" required />
+        <input id="product-price" type="number" placeholder="Price" step="0.01" required />
+        <input id="product-discount" type="number" placeholder="Discount %" min="0" max="100" />
+        <input id="product-stock" type="number" placeholder="Stock" required />
+        <input id="product-imageUrl" type="text" placeholder="Image URL" />
+        <div class="form-actions">
+          <button type="button" id="close-product-modal" class="btn ghost">Cancel</button>
+          <button type="submit" class="btn solid">Save Product</button>
+        </div>
+        <p id="product-status" class="status"></p>
+      </form>
+    </dialog>
+
+    <script>window.Stripe = null; typeof Stripe !== 'undefined' ? window.Stripe = window.Stripe : null;</script>
+    <script src="app.js"></script>
+  </body>
+</html>
